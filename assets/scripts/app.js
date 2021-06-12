@@ -20,23 +20,46 @@ class Product {
     }
   }
 }
-const productList = {
-  products: [
+class ProductItem {
+    constructor(Product) {
+        this.Product = Product;
+    }
+    render() {
+        const prodEl = document.createElement(`li`);
+      prodEl.className = `product-item`;
+      prodEl.innerHTML = `     
+             <div>
+             <img src="${this.Product.imageUrl}" alt="${this.Product.title}"/>
+             <div class="product-item__content">
+             <h2>${this.Product.title}</h2>
+             <h3>${this.Product.price}</h3>
+             <p>${this.Product.discription}</p>
+             <button> add to Card </button>
+             </div>
+             </div>   `;
+
+             return prodEl;
+    }
+}
+class ProductList  {
+  products = [
     new Product(),
     new Product(
       `A pillow`,
       `https://www.daysoftheyear.com/cdn-cgi/image/fit=cover%2Cf=auto%2Conerror=redirect%2Cwidth=2560/wp-content/uploads/put-a-pillow-on-your-fridge-day1-scaled.jpg`,
       `A soft pillow`,
-      19.99
+      '$19.99'
     ),
 
     new Product(
       `A Carpet`,
       `https://cdn.shopify.com/s/files/1/1202/8764/products/S1412_1_-_Copy_-_Copy_grande.jpg?v=1590171471`,
       `A Carpet that you maight like or not!`,
-      899.99
+      '$89.9'
     ),
-  ],
+  ];
+
+  constructor() {}
   render() {
     const renderHook = document.getElementById(`app`);
     const prodList = document.createElement(`ul`);
@@ -44,22 +67,13 @@ const productList = {
     prodList.className = `product-list`;
 
     for (const prod of this.products) {
-      const prodEl = document.createElement(`li`);
-      prodEl.className = `product-item`;
-      prodEl.innerHTML = `     
-             <div>
-             <img src="${prod.imageUrl}" alt="${prod.title}"/>
-             <div class="product-item__content">
-             <h2>${prod.title}</h2>
-             <h3>\$${prod.price}</h3>
-             <p>${prod.discription}</p>
-             <button> add to Card </button>
-             </div>
-             </div>   `;
+      const productItem = new ProductItem(prod);
+      const prodEl = productItem.render();
       prodList.append(prodEl);
     }
 
     renderHook.append(prodList);
-  },
+  };
 };
+const productList = new ProductList()
 productList.render();
