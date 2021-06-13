@@ -21,11 +21,26 @@ class Product {
   }
 }
 class ShopingCart {
-  item = [];
+  items = [];
+
+  set cartItems(value) {
+    this.items = value;
+    this.totalOutput.innerHTML = `<h2> Total: \$${this.totalAmount.toFixed(
+      2
+    )} </h2>`;
+  }
+
+  get totalAmount() {
+    const sum = this.items
+      .filter((item) => item.price !== NaN)
+      .reduce((sumVal, curItem) => sumVal + curItem.price, 0);
+    return sum;
+  }
 
   addProduct(product) {
-    this.item.push(product);
-    this.totalOutput.innerHTML = `<h2> Total: \$${1} </h2>`;
+    const UpdatedItems = [...this.items];
+    UpdatedItems.push(product);
+    this.cartItems = UpdatedItems;
   }
 
   render() {
