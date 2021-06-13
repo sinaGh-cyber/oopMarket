@@ -25,7 +25,7 @@ class ShopingCart {
 
   render() {
     const cartEl = document.createElement(`section`);
-    cartEl = `
+    cartEl.innerHTML = `
        <h2> Total: \$${0} </h2>
        <button> Order now </button>   
     `;
@@ -50,7 +50,7 @@ class ProductItem {
              <img src="${this.product.imageUrl}" alt="${this.product.title}"/>
              <div class="product-item__content">
              <h2>${this.product.title}</h2>
-             <h3>${this.product.price}</h3>
+             <h3>\$${this.product.price}</h3>
              <p>${this.product.discription}</p>
              <button> add to Card </button>
              </div>
@@ -68,20 +68,19 @@ class ProductList {
       `A pillow`,
       `https://www.daysoftheyear.com/cdn-cgi/image/fit=cover%2Cf=auto%2Conerror=redirect%2Cwidth=2560/wp-content/uploads/put-a-pillow-on-your-fridge-day1-scaled.jpg`,
       `A soft pillow`,
-      "$19.99"
+      19.99
     ),
 
     new Product(
       `A Carpet`,
       `https://cdn.shopify.com/s/files/1/1202/8764/products/S1412_1_-_Copy_-_Copy_grande.jpg?v=1590171471`,
       `A Carpet that you maight like or not!`,
-      "$89.9"
+      89.9
     ),
   ];
 
   constructor() {}
   render() {
-    const renderHook = document.getElementById(`app`);
     const prodList = document.createElement(`ul`);
 
     prodList.className = `product-list`;
@@ -92,8 +91,20 @@ class ProductList {
       prodList.append(prodEl);
     }
 
-    renderHook.append(prodList);
+    return prodList;
   }
 }
-const productList = new ProductList();
-productList.render();
+
+class Shop {
+  render() {
+    const renderHook = document.getElementById(`app`);
+    const cart = new ShopingCart();
+    const cartEl = cart.render();
+    const productList = new ProductList();
+    const prodListEl = productList.render();
+    renderHook.append(cartEl);
+    renderHook.append(prodListEl);
+  }
+}
+const shop = new Shop();
+shop.render();
