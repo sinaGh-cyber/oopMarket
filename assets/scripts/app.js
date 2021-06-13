@@ -4,7 +4,7 @@ class Product {
   discription = `no more`;
   price = `call to customer service for more information`;
 
-  constructor(titleArg, imageUrlArg,discriptionArg, priceArg ) {
+  constructor(titleArg, imageUrlArg, discriptionArg, priceArg) {
     if (titleArg !== undefined) {
       this.title = titleArg;
     }
@@ -20,19 +20,32 @@ class Product {
     }
   }
 }
-class ProductItem {
-    constructor(product) {
-        this.product = product;
-    }
-    addToCard() {
-        console.log(`Adding to Cart...`);
-        console.log(this.product);
-    }
+class ShopingCart {
+  item = [];
 
-    render() {
-        const prodEl = document.createElement(`li`);
-      prodEl.className = `product-item`;
-      prodEl.innerHTML = `     
+  render() {
+    const cartEl = document.createElement(`section`);
+    cartEl = `
+       <h2> Total: \$${0} </h2>
+       <button> Order now </button>   
+    `;
+    cartEl.className = `cart`;
+    return cartEl;
+  }
+}
+class ProductItem {
+  constructor(product) {
+    this.product = product;
+  }
+  addToCard() {
+    console.log(`Adding to Cart...`);
+    console.log(this.product);
+  }
+
+  render() {
+    const prodEl = document.createElement(`li`);
+    prodEl.className = `product-item`;
+    prodEl.innerHTML = `     
              <div>
              <img src="${this.product.imageUrl}" alt="${this.product.title}"/>
              <div class="product-item__content">
@@ -42,27 +55,27 @@ class ProductItem {
              <button> add to Card </button>
              </div>
              </div>   `;
-             const addCartBtn = prodEl.querySelector(`button`);
-             addCartBtn.addEventListener(`click`, this.addToCard.bind(this));
+    const addCartBtn = prodEl.querySelector(`button`);
+    addCartBtn.addEventListener(`click`, this.addToCard.bind(this));
 
-             return prodEl;
-    }
+    return prodEl;
+  }
 }
-class ProductList  {
+class ProductList {
   products = [
     new Product(),
     new Product(
       `A pillow`,
       `https://www.daysoftheyear.com/cdn-cgi/image/fit=cover%2Cf=auto%2Conerror=redirect%2Cwidth=2560/wp-content/uploads/put-a-pillow-on-your-fridge-day1-scaled.jpg`,
       `A soft pillow`,
-      '$19.99'
+      "$19.99"
     ),
 
     new Product(
       `A Carpet`,
       `https://cdn.shopify.com/s/files/1/1202/8764/products/S1412_1_-_Copy_-_Copy_grande.jpg?v=1590171471`,
       `A Carpet that you maight like or not!`,
-      '$89.9'
+      "$89.9"
     ),
   ];
 
@@ -80,7 +93,7 @@ class ProductList  {
     }
 
     renderHook.append(prodList);
-  };
-};
-const productList = new ProductList()
+  }
+}
+const productList = new ProductList();
 productList.render();
