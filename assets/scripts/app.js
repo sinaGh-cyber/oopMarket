@@ -23,13 +23,19 @@ class Product {
 class ShopingCart {
   item = [];
 
+  addProduct(product) {
+      this.item.push(product);
+      this.totalOutput = `<h2> Total: \$${1} </h2>`;
+  }
+
   render() {
     const cartEl = document.createElement(`section`);
     cartEl.innerHTML = `
-       <h2> Total: \$${0} </h2>
+       
        <button> Order now </button>   
     `;
     cartEl.className = `cart`;
+    this.totalOutput = cartEl.querySelector(`h2`);
     return cartEl;
   }
 }
