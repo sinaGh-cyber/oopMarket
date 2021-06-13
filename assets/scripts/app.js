@@ -21,22 +21,29 @@ class Product {
   }
 }
 class ProductItem {
-    constructor(Product) {
-        this.Product = Product;
+    constructor(product) {
+        this.product = product;
     }
+    addToCard() {
+        console.log(`Adding to Cart...`);
+        console.log(this.product);
+    }
+
     render() {
         const prodEl = document.createElement(`li`);
       prodEl.className = `product-item`;
       prodEl.innerHTML = `     
              <div>
-             <img src="${this.Product.imageUrl}" alt="${this.Product.title}"/>
+             <img src="${this.product.imageUrl}" alt="${this.product.title}"/>
              <div class="product-item__content">
-             <h2>${this.Product.title}</h2>
-             <h3>${this.Product.price}</h3>
-             <p>${this.Product.discription}</p>
+             <h2>${this.product.title}</h2>
+             <h3>${this.product.price}</h3>
+             <p>${this.product.discription}</p>
              <button> add to Card </button>
              </div>
              </div>   `;
+             const addCartBtn = prodEl.querySelector(`button`);
+             addCartBtn.addEventListener(`click`, this.addToCard.bind(this));
 
              return prodEl;
     }
