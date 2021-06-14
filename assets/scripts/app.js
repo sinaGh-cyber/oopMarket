@@ -31,9 +31,7 @@ class ShopingCart {
   }
 
   get totalAmount() {
-    const preVal = this.items.filter((item) => !isNaN(item.price));
-    console.log(preVal);
-    const sum = preVal.reduce((sumVal, curItem) => sumVal + curItem.price, 0);
+    const sum = this.items.filter((item) => !isNaN(item.price)).reduce((sumVal, curItem) => sumVal + curItem.price, 0);
     return sum;
   }
 
