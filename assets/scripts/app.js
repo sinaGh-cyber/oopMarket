@@ -23,7 +23,6 @@ class Product {
 
 class ElementAttribute {
   constructor(attrName, attrValue) {
-    console.log(`ElementAttribute`);
     this.name = attrName;
     this.value = attrValue;
   }
